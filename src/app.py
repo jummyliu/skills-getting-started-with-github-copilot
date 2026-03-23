@@ -20,6 +20,7 @@ app.mount("/static", StaticFiles(directory=os.path.join(Path(__file__).parent,
           "static")), name="static")
 
 # In-memory activity database
+
 activities = {
     "Chess Club": {
         "description": "Learn strategies and compete in chess tournaments",
@@ -39,6 +40,49 @@ activities = {
         "max_participants": 30,
         "participants": ["john@mergington.edu", "olivia@mergington.edu"]
     }
+}
+
+# Add more activities to the database
+activities["Basketball"] = {
+    "description": "Team sport focusing on basketball skills and competitions",
+    "schedule": "Mondays and Wednesdays, 4:00 PM - 5:30 PM",
+    "max_participants": 15,
+    "participants": []
+}
+
+activities["Tennis"] = {
+    "description": "Individual and doubles tennis training",
+    "schedule": "Tuesdays and Thursdays, 3:30 PM - 5:00 PM",
+    "max_participants": 10,
+    "participants": []
+}
+
+activities["Art Club"] = {
+    "description": "Explore painting, drawing, and sculpture techniques",
+    "schedule": "Wednesdays, 3:30 PM - 5:00 PM",
+    "max_participants": 16,
+    "participants": []
+}
+
+activities["Music Ensemble"] = {
+    "description": "Learn and perform various musical instruments",
+    "schedule": "Fridays, 3:30 PM - 5:00 PM",
+    "max_participants": 25,
+    "participants": []
+}
+
+activities["Debate Team"] = {
+    "description": "Develop public speaking and argumentative skills",
+    "schedule": "Mondays and Thursdays, 4:00 PM - 5:30 PM",
+    "max_participants": 12,
+    "participants": []
+}
+
+activities["Science Club"] = {
+    "description": "Conduct experiments and explore scientific concepts",
+    "schedule": "Tuesdays, 3:30 PM - 5:00 PM",
+    "max_participants": 18,
+    "participants": []
 }
 
 
@@ -62,6 +106,9 @@ def signup_for_activity(activity_name: str, email: str):
     # Get the specific activity
     activity = activities[activity_name]
 
+    # 验证学生是否已注册
+    if email in activity["participants"]:
+        raise HTTPException(status_code=400, detail="Student already signed up for this activity")
     # Add student
     activity["participants"].append(email)
     return {"message": f"Signed up {email} for {activity_name}"}
