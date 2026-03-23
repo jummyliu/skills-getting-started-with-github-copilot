@@ -21,7 +21,13 @@ A super simple FastAPI application that allows students to view and sign up for 
    python app.py
    ```
 
-3. Open your browser and go to:
+3. Run tests:
+
+   ```
+   pytest -q
+   ```
+
+4. Open your browser and go to:
    - API documentation: http://localhost:8000/docs
    - Alternative documentation: http://localhost:8000/redoc
 
@@ -37,7 +43,6 @@ A super simple FastAPI application that allows students to view and sign up for 
 The application uses a simple data model with meaningful identifiers:
 
 1. **Activities** - Uses activity name as identifier:
-
    - Description
    - Schedule
    - Maximum number of participants allowed
